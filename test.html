@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fahrer-Optionen Visualisierung</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      text-align: center;
+    }
+    .options-grid {
+      display: flex;
+      justify-content: space-around;
+      gap: 20px;
+    }
+    .option-card {
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #f9f9f9;
+      width: 22%;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .option-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .option-header {
+      padding: 10px;
+      text-align: center;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .option-details {
+      padding: 15px;
+      font-size: 14px;
+    }
+    .option-details p {
+      margin: 5px 0;
+    }
+    .option-image {
+      max-width: 100%;
+      height: auto;
+    }
+    .action {
+      margin: 10px;
+      padding: 10px;
+      text-align: center;
+      color: white;
+      background-color: #007bff;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    .action:hover {
+      background-color: #0056b3;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      z-index: 10;
+      width: 400px;
+    }
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 9;
+    }
+    .button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    .button:hover {
+      background-color: #218838;
+    }
+    .route-image {
+      max-width: 100%;
+      margin-top: 10px;
+    }
+    /* Color coding based on CO₂ reduction */
+    .green-high { background-color: #28a745; }
+    .green-medium { background-color: #85c15e; }
+    .green-low { background-color: #d4edda; }
+  </style>
+  <script>
+    function selectOption(optionName) {
+      if (optionName === "Car Sharing") {
+        showCarSharingDetails();
+      } else {
+        document.getElementById('popup-message').textContent = 
+        `Option "${optionName}" wurde gewählt! Sie erhalten 100 Punkte. Möchten Sie anonym Ihre Daten teilen, um Verkehrsplanung zu verbessern?`;
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+      }
+    }
+    function closePopup(shareData) {
+      let message = shareData 
+        ? "🎉 Danke für das Teilen Ihrer Daten! +50 Punkte! 🎉" 
+        : "Danke! Ihre Punkte wurden gutgeschrieben. 👍";
+      alert(message);
+      document.getElementById('popup').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
+    }
+
+    function showCarSharingDetails() {
+      document.getElementById('car-sharing-popup').style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
+    }
+
+    function closeCarSharingPopup() {
+      document.getElementById('car-sharing-popup').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Fahrer-Optionen</h1>
+      <p>Wählen Sie die beste Option für Ihre Reise:</p>
+    </div>
+    <div class="options-grid">
+      <!-- Option 1 -->
+      <div class="option-card">
+        <div class="option-header green-high">Öffentlicher Verkehr</div>
+        <img src="images/public_transport.jpg" alt="Öffentlicher Verkehr" class="option-image">
+        <div class="option-details">
+          <p>CO₂-Reduktion: <strong>80%</strong></p>
+          <p>Geschätzte Zeit: 30 Minuten</p>
+        </div>
+        <div class="action" onclick="selectOption('Öffentlicher Verkehr')">Wählen</div>
+      </div>
+      <!-- Option 2 -->
+      <div class="option-card">
+        <div class="option-header green-medium">Car Sharing</div>
+        <img src="images/carsharing.png" alt="Car Sharing" class="option-image">
+        <div class="option-details">
+          <p>CO₂-Reduktion: <strong>60%</strong></p>
+          <p>Geschätzte Zeit: 25 Minuten</p>
+        </div>
+        <div class="action" onclick="selectOption('Car Sharing')">Wählen</div>
+      </div>
+      <!-- Option 3 -->
+      <div class="option-card">
+        <div class="option-header green-medium">Auto + öffentlicher Verkehr</div>
+        <img src="images/park-public.jpg" alt="Auto + öffentlicher Verkehr" class="option-image">
+        <div class="option-details">
+          <p>CO₂-Reduktion: <strong>70%</strong></p>
+          <p>Geschätzte Zeit: 35 Minuten</p>
+        </div>
+        <div class="action" onclick="selectOption('Auto + öffentlicher Verkehr')">Wählen</div>
+      </div>
+      <!-- Option 4 -->
+      <div class="option-card">
+        <div class="option-header green-low">Direkte Autofahrt</div>
+        <img src="images/singleCarDriver.png" alt="Direkte Autofahrt" class="option-image">
+        <div class="option-details">
+          <p>CO₂-Reduktion: <strong>0%</strong></p>
+          <p>Geschätzte Zeit: 20 Minuten</p>
+        </div>
+        <div class="action" onclick="selectOption('Direkte Autofahrt')">Wählen</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay and Popup for Car Sharing -->
+  <div class="overlay" id="overlay"></div>
+  <div class="popup" id="car-sharing-popup">
+    <h3>Car Sharing - Details</h3>
+    <p>
+        Sie fahren zusammen mit anderen Nutzern auf derselben Route. Fahren Sie bis zum Treffpunkt und setzen Sie Ihre Reise gemeinsam fort.
+    </p>
+    <p>
+        <a href="https://www.google.com/maps/dir/TUM+School+of+Management,+Arcisstraße,+Münih-Maxvorstadt/Hauptbahnhof,+Münih-Ludwigsvorstadt-Isarvorstadt/@48.144971,11.5587719,16z/data=!3m2!4b1!5s0x479e75ef677881e9:0xa12f3bb490663fcb!4m14!4m13!1m5!1m1!1s0x479e75ef4cbc7a41:0x22afed18eec3f727!2m2!1d11.5670102!2d48.1500457!1m5!1m1!1s0x479e75f9beff1969:0xb6c90347b31c06e0!2m2!1d11.5609584!2d48.139775!3e0?entry=ttu&g_ep=EgoyMDI0MTExMy4xIKXMDSoASAFQAw%3D%3D" 
+           target="_blank" 
+           style="color: #007bff; text-decoration: none;">
+           Route auf Google Maps anzeigen
+        </a>
+    </p>
+    <img src="images/route.png" alt="Route zum Treffpunkt" class="route-image">
+    <button class="button" onclick="closeCarSharingPopup()">Schließen</button>
+</div>
+
+</body>
+</html>
