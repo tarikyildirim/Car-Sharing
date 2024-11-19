@@ -85,7 +85,7 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       text-align: center;
       z-index: 10;
-      width: 400px;
+      width: 300px;
     }
     .overlay {
       display: none;
@@ -109,10 +109,6 @@
     .button:hover {
       background-color: #218838;
     }
-    .route-image {
-      max-width: 100%;
-      margin-top: 10px;
-    }
     /* Color coding based on CO₂ reduction */
     .green-high { background-color: #28a745; }
     .green-medium { background-color: #85c15e; }
@@ -120,31 +116,18 @@
   </style>
   <script>
     function selectOption(optionName) {
-      if (optionName === "Car Sharing") {
-        showCarSharingDetails();
-      } else {
-        document.getElementById('popup-message').textContent = 
-        `Option "${optionName}" wurde gewählt! Sie erhalten 100 Punkte. Möchten Sie anonym Ihre Daten teilen, um Verkehrsplanung zu verbessern?`;
-        document.getElementById('popup').style.display = 'block';
-        document.getElementById('overlay').style.display = 'block';
-      }
+      document.getElementById('popup-message').textContent = 
+      `Option "${optionName}" wurde gewählt! Sie erhalten 100 Punkte. Möchten Sie anonym Ihre Daten teilen, um Verkehrsplanung zu verbessern?`;
+      document.getElementById('popup').style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
     }
+
     function closePopup(shareData) {
       let message = shareData 
         ? "🎉 Danke für das Teilen Ihrer Daten! +50 Punkte! 🎉" 
         : "Danke! Ihre Punkte wurden gutgeschrieben. 👍";
       alert(message);
       document.getElementById('popup').style.display = 'none';
-      document.getElementById('overlay').style.display = 'none';
-    }
-
-    function showCarSharingDetails() {
-      document.getElementById('car-sharing-popup').style.display = 'block';
-      document.getElementById('overlay').style.display = 'block';
-    }
-
-    function closeCarSharingPopup() {
-      document.getElementById('car-sharing-popup').style.display = 'none';
       document.getElementById('overlay').style.display = 'none';
     }
   </script>
@@ -171,6 +154,14 @@
         <div class="option-header green-medium">Car Sharing</div>
         <img src="images/carsharing.png" alt="Car Sharing" class="option-image">
         <div class="option-details">
+          <p>Sie fahren zusammen mit anderen Nutzern auf derselben Route. Fahren Sie bis zum Treffpunkt und setzen Sie Ihre Reise gemeinsam fort.
+          <p>
+            <a href="https://www.google.com/maps/dir/?api=1&origin=Berlin&destination=München&travelmode=driving" 
+               target="_blank" 
+               style="color: #007bff; text-decoration: none;">
+               Route auf Google Maps anzeigen
+            </a>
+          </p>
           <p>CO₂-Reduktion: <strong>60%</strong></p>
           <p>Geschätzte Zeit: 25 Minuten</p>
         </div>
@@ -199,23 +190,11 @@
     </div>
   </div>
 
-  <!-- Overlay and Popup for Car Sharing -->
   <div class="overlay" id="overlay"></div>
-  <div class="popup" id="car-sharing-popup">
-    <h3>Car Sharing - Details</h3>
-    <p>
-        Sie fahren zusammen mit anderen Nutzern auf derselben Route. Fahren Sie bis zum Treffpunkt und setzen Sie Ihre Reise gemeinsam fort.
-    </p>
-    <p>
-        <a href="https://www.google.com/maps/dir/TUM+School+of+Management,+Arcisstraße,+Münih-Maxvorstadt/Hauptbahnhof,+Münih-Ludwigsvorstadt-Isarvorstadt/@48.144971,11.5587719,16z/data=!3m2!4b1!5s0x479e75ef677881e9:0xa12f3bb490663fcb!4m14!4m13!1m5!1m1!1s0x479e75ef4cbc7a41:0x22afed18eec3f727!2m2!1d11.5670102!2d48.1500457!1m5!1m1!1s0x479e75f9beff1969:0xb6c90347b31c06e0!2m2!1d11.5609584!2d48.139775!3e0?entry=ttu&g_ep=EgoyMDI0MTExMy4xIKXMDSoASAFQAw%3D%3D" 
-           target="_blank" 
-           style="color: #007bff; text-decoration: none;">
-           Route auf Google Maps anzeigen
-        </a>
-    </p>
-    <img src="images/route.png" alt="Route zum Treffpunkt" class="route-image">
-    <button class="button" onclick="closeCarSharingPopup()">Schließen</button>
-</div>
-
+  <div class="popup" id="popup">
+    <p id="popup-message"></p>
+    <button class="button" onclick="closePopup(true)">Ja, anonym teilen</button>
+    <button class="button" onclick="closePopup(false)">Nein, nur Punkte sammeln</button>
+  </div>
 </body>
 </html>
