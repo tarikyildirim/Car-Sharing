@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fahrplandaten Eingabe</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .day-section {
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      background-color: #fafafa;
+    }
+    .day-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .add-button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .add-button:hover {
+      background-color: #218838;
+    }
+    .trip-input {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    input, select {
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      flex: 1;
+    }
+    input[type="time"], input[type="text"] {
+      flex: 2;
+    }
+    .remove-button {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .remove-button:hover {
+      background-color: #c82333;
+    }
+    .submit-button {
+      display: block;
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .submit-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+  <script>
+    function addTrip(day) {
+      const tripContainer = document.querySelector(`#trips-${day}`);
+      const tripIndex = tripContainer.children.length + 1;
+
+      const tripDiv = document.createElement('div');
+      tripDiv.className = 'trip-input';
+      tripDiv.innerHTML = `
+        <input type="text" name="${day}_address_${tripIndex}" placeholder="Adresse (z.B. Büro, Schule)">
+        <input type="time" name="${day}_arrival_${tripIndex}" placeholder="Ankunftszeit">
+        <input type="time" name="${day}_return_${tripIndex}" placeholder="Rückkehrzeit">
+        <button type="button" class="remove-button" onclick="removeTrip(this)">Löschen</button>
+      `;
+
+      tripContainer.appendChild(tripDiv);
+    }
+
+    function removeTrip(button) {
+      const tripDiv = button.parentElement;
+      tripDiv.remove();
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Fahrplandaten eingeben</h1>
+      <p>Planen Sie Ihre Fahrten für die Woche:</p>
+    </div>
+    <form action="test.html" method="GET">
+      <!-- Montag -->
+      <div class="day-section">
+        <div class="day-header">
+          <label>
+            <input type="checkbox" name="days[]" value="Montag">
+            <strong>Montag</strong>
+          </label>
+          <button type="button" class="add-button" onclick="addTrip('Montag')">+ Fahrt hinzufügen</button>
+        </div>
+        <div id="trips-Montag" class="trip-container"></div>
+      </div>
+      <!-- Dienstag -->
+      <div class="day-section">
+        <div class="day-header">
+          <label>
+            <input type="checkbox" name="days[]" value="Dienstag">
+            <strong>Dienstag</strong>
+          </label>
+          <button type="button" class="add-button" onclick="addTrip('Dienstag')">+ Fahrt hinzufügen</button>
+        </div>
+        <div id="trips-Dienstag" class="trip-container"></div>
+      </div>
+      <!-- Mittwoch -->
+      <div class="day-section">
+        <div class="day-header">
+          <label>
+            <input type="checkbox" name="days[]" value="Mittwoch">
+            <strong>Mittwoch</strong>
+          </label>
+          <button type="button" class="add-button" onclick="addTrip('Mittwoch')">+ Fahrt hinzufügen</button>
+        </div>
+        <div id="trips-Mittwoch" class="trip-container"></div>
+      </div>
+      <!-- Donnerstag -->
+      <div class="day-section">
+        <div class="day-header">
+          <label>
+            <input type="checkbox" name="days[]" value="Donnerstag">
+            <strong>Donnerstag</strong>
+          </label>
+          <button type="button" class="add-button" onclick="addTrip('Donnerstag')">+ Fahrt hinzufügen</button>
+        </div>
+        <div id="trips-Donnerstag" class="trip-container"></div>
+      </div>
+      <!-- Freitag -->
+      <div class="day-section">
+        <div class="day-header">
+          <label>
+            <input type="checkbox" name="days[]" value="Freitag">
+            <strong>Freitag</strong>
+          </label>
+          <button type="button" class="add-button" onclick="addTrip('Freitag')">+ Fahrt hinzufügen</button>
+        </div>
+        <div id="trips-Freitag" class="trip-container"></div>
+      </div>
+      <!-- Samstag -->
+      <div class="day-section">
+        <div class="day-header">
+          <label>
+            <input type="checkbox" name="days[]" value="Samstag">
+            <strong>Samstag</strong>
+          </label>
+          <button type="button" class="add-button" onclick="addTrip('Samstag')">+ Fahrt hinzufügen</button>
+        </div>
+        <div id="trips-Samstag" class="trip-container"></div>
+      </div>
+      <!-- Sonntag -->
+      <div class="day-section">
+        <div class="day-header">
+          <label>
+            <input type="checkbox" name="days[]" value="Sonntag">
+            <strong>Sonntag</strong>
+          </label>
+          <button type="button" class="add-button" onclick="addTrip('Sonntag')">+ Fahrt hinzufügen</button>
+        </div>
+        <div id="trips-Sonntag" class="trip-container"></div>
+      </div>
+      <button type="submit" class="submit-button">Weiter</button>
+    </form>
+  </div>
+</body>
+</html>
