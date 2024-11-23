@@ -18,6 +18,7 @@
       background-color: #fff;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      position: relative;
     }
     .header {
       text-align: center;
@@ -113,20 +114,48 @@
     .green-high { background-color: #28a745; }
     .green-medium { background-color: #85c15e; }
     .green-low { background-color: #d4edda; }
+
+    /* Point Display Box */
+    .points-box {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .points-box .emoji {
+      font-size: 24px;
+    }
   </style>
   <script>
-    function selectOption(optionName) {
+    let currentPoints = 0;
+
+    function selectOption(optionName, co2Reduction) {
+      currentPoints += co2Reduction;
       document.getElementById('popup-message').textContent = 
-      `Option "${optionName}" wurde gewählt! Sie erhalten 100 Punkte. Möchten Sie anonym Ihre Daten teilen, um Verkehrsplanung zu verbessern?`;
+      `Option "${optionName}" wurde gewählt! Sie erhalten ${co2Reduction} Punkte. Möchten Sie anonym Ihre Daten teilen, um Verkehrsplanung zu verbessern?`;
       document.getElementById('popup').style.display = 'block';
       document.getElementById('overlay').style.display = 'block';
+
+      // Update the points display
+      document.getElementById('current-points').textContent = currentPoints;
     }
 
     function closePopup(shareData) {
-      let message = shareData 
-        ? "🎉 Danke für das Teilen Ihrer Daten! +50 Punkte! 🎉" 
-        : "Danke! Ihre Punkte wurden gutgeschrieben. 👍";
-      alert(message);
+      if (shareData) {
+        currentPoints += 50; // Adding 50 points if the user shares data anonymously
+        document.getElementById('current-points').textContent = currentPoints;
+        alert("🎉 Danke für das Teilen Ihrer Daten! +50 Punkte! 🎉");
+      } else {
+        alert("Danke! Ihre Punkte wurden gutgeschrieben. 👍");
+      }
       document.getElementById('popup').style.display = 'none';
       document.getElementById('overlay').style.display = 'none';
     }
@@ -134,38 +163,36 @@
 </head>
 <body>
   <div class="container">
+    <!-- Points Display Box -->
+    <div class="points-box">
+      <span class="emoji">🏅</span>
+      <span id="current-points">0</span> Punkte
+    </div>
+
     <div class="header">
       <h1>Fahrer-Optionen</h1>
-      <p>Wählen Sie die beste Option für Ihre Reise:</p>
+      <p>Laut Verkehrspl:</p>
     </div>
     <div class="options-grid">
       <!-- Option 1 -->
       <div class="option-card">
         <div class="option-header green-high">Öffentlicher Verkehr</div>
-        <img src="images/public_transport.jpg" alt="Öffentlicher Verkehr" class="option-image">
+        <img src="images/public.jpg" alt="Öffentlicher Verkehr" class="option-image">
         <div class="option-details">
           <p>CO₂-Reduktion: <strong>80%</strong></p>
           <p>Geschätzte Zeit: 30 Minuten</p>
         </div>
-        <div class="action" onclick="selectOption('Öffentlicher Verkehr')">Wählen</div>
+        <div class="action" onclick="selectOption('Öffentlicher Verkehr', 80)">Wählen</div>
       </div>
       <!-- Option 2 -->
       <div class="option-card">
         <div class="option-header green-medium">Car Sharing</div>
         <img src="images/carsharing.png" alt="Car Sharing" class="option-image">
         <div class="option-details">
-          <p>Sie fahren zusammen mit anderen Nutzern auf derselben Route. Fahren Sie bis zum Treffpunkt und setzen Sie Ihre Reise gemeinsam fort.
-          <p>
-            <a href="https://www.google.com/maps/dir/?api=1&origin=Berlin&destination=München&travelmode=driving" 
-               target="_blank" 
-               style="color: #007bff; text-decoration: none;">
-               Route auf Google Maps anzeigen
-            </a>
-          </p>
           <p>CO₂-Reduktion: <strong>60%</strong></p>
           <p>Geschätzte Zeit: 25 Minuten</p>
         </div>
-        <div class="action" onclick="selectOption('Car Sharing')">Wählen</div>
+        <div class="action" onclick="selectOption('Car Sharing', 60)">Wählen</div>
       </div>
       <!-- Option 3 -->
       <div class="option-card">
@@ -175,17 +202,17 @@
           <p>CO₂-Reduktion: <strong>70%</strong></p>
           <p>Geschätzte Zeit: 35 Minuten</p>
         </div>
-        <div class="action" onclick="selectOption('Auto + öffentlicher Verkehr')">Wählen</div>
+        <div class="action" onclick="selectOption('Auto + öffentlicher Verkehr', 70)">Wählen</div>
       </div>
       <!-- Option 4 -->
       <div class="option-card">
         <div class="option-header green-low">Direkte Autofahrt</div>
-        <img src="images/singleCarDriver.png" alt="Direkte Autofahrt" class="option-image">
+        <img src="images/singleCar.jpg" alt="Direkte Autofahrt" class="option-image">
         <div class="option-details">
           <p>CO₂-Reduktion: <strong>0%</strong></p>
           <p>Geschätzte Zeit: 20 Minuten</p>
         </div>
-        <div class="action" onclick="selectOption('Direkte Autofahrt')">Wählen</div>
+        <div class="action" onclick="selectOption('Direkte Autofahrt', 0)">Wählen</div>
       </div>
     </div>
   </div>

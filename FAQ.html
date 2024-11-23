@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Nachhaltige Pendelrouten</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f8f6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #80e0a7; /* Weiches, angenehmes Grün */
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        header p {
+            font-size: 1.2rem;
+            margin-top: 0;
+            font-weight: 300;
+        }
+        .content {
+            padding: 20px;
+        }
+        .section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        .section h2 {
+            color: #80e0a7;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+            cursor: pointer; /* Cursor ändern, um Interaktivität zu signalisieren */
+        }
+        p {
+            line-height: 1.6;
+        }
+        ol {
+            padding-left: 20px;
+            margin-top: 20px;
+        }
+        footer {
+            text-align: center;
+            color: #555;
+            font-size: 0.9rem;
+            margin-top: 50px;
+            padding: 10px;
+        }
+        .faq-answer {
+            display: none; /* Antwort standardmäßig verbergen */
+            font-size: 1rem;
+            margin-top: 10px;
+            color: #555;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🔍 Häufig gestellte Fragen (FAQ)</h1>
+        <p>Hier finden Sie Antworten auf die häufigsten Fragen zu unserem nachhaltigen Pendelrouten-Konzept. 🌱</p>
+    </header>
+
+    <div class="content">
+        <div class="section">
+            <h2 onclick="toggleAnswer('answer1')">Warum sollte ich meine gewählte Pendeloption teilen?</h2>
+            <div class="faq-answer" id="answer1">
+                Die Weitergabe Ihrer gewählten Pendeloptionen hilft dabei, die öffentliche Verkehrsinfrastruktur nachhaltig zu verbessern. Mit den gesammelten Daten können unter anderem neue S-Bahn-Linien, zusätzliche Busverbindungen oder optimierte Fahrtzeiten geplant werden. Auch die Stadtentwicklung profitiert, etwa durch die Schaffung von Parkplätzen an strategischen Treffpunkten für Car-Sharing. Ihre Informationen tragen somit direkt zur Verbesserung der Verkehrsnetze und der Lebensqualität in der Stadt bei.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 onclick="toggleAnswer('answer2')">Werden meine personenbezogenen Daten gespeichert? Falls ja, wie wird deren Schutz gewährleistet?</h2>
+            <div class="faq-answer" id="answer2">
+                Es werden keine personenbezogenen Daten gespeichert, die es ermöglichen, Sie als Individuum zu identifizieren. Die von Ihnen angegebenen Daten werden ausschließlich zur Verbesserung der Stadtplanung und zur Optimierung von Pendelrouten genutzt. Diese Daten werden anonymisiert und zentral verarbeitet, wodurch eine Rückverfolgung auf Einzelpersonen ausgeschlossen wird. Persönliche Informationen wie Ihre gesparte CO2-Menge und gesammelte Punkte werden zur Berechnung und Verwaltung von Belohnungen gespeichert. Der Schutz dieser Daten erfolgt durch sichere Verschlüsselungstechnologien und strenge Datenschutzrichtlinien, die sicherstellen, dass Ihre Informationen nur für den vorgesehenen Zweck verwendet werden.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 onclick="toggleAnswer('answer3')">Wie gebe ich anonymisierte Daten zur Verbesserung der Verkehrsplanung weiter?</h2>
+            <div class="faq-answer" id="answer3">
+                Nachdem Sie eine Pendeloption ausgewählt haben, werden Sie gefragt, ob Sie zustimmen, anonymisierte Daten zur Verbesserung der Verkehrsplanung weiterzugeben. Wenn Sie auf 'Ich stimme zu' klicken, werden Ihre Daten anonymisiert und sicher an die zuständigen Stellen weitergegeben. 
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 onclick="toggleAnswer('answer4')">Was passiert, wenn ich meine Daten nicht weitergebe? Erhalte ich trotzdem Punkte?</h2>
+            <div class="faq-answer" id="answer4">
+                Ja, auch wenn Sie sich entscheiden, Ihre Daten nicht weiterzugeben, erhalten Sie weiterhin Punkte, wenn Sie durch die Wahl einer umweltfreundlichen Route CO2 einsparen. Die Punkte werden für die CO2-Einsparung basierend auf Ihrer gewählten Option vergeben. Wenn Sie sich jedoch entscheiden, Ihre anonymisierten Daten zur Verbesserung der Verkehrsplanung weiterzugeben, erhalten Sie zusätzliche Punkte. 
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleAnswer(id) {
+            var answer = document.getElementById(id);
+            if (answer.style.display === "block") {
+                answer.style.display = "none";
+            } else {
+                answer.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
