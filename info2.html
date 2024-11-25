@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nachhaltige Pendelrouten</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f8f6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #80e0a7; /* Weiches, angenehmes Grün */
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        header p {
+            font-size: 1.2rem;
+            margin-top: 0;
+            font-weight: 300;
+        }
+        .content {
+            padding: 20px;
+        }
+        .section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        .section h2 {
+            color: #80e0a7;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+        }
+        p {
+            line-height: 1.6;
+        }
+        ol {
+            padding-left: 20px;
+            margin-top: 20px;
+        }
+        footer {
+            text-align: center;
+            color: #555;
+            font-size: 0.9rem;
+            margin-top: 50px;
+            padding: 10px;
+        }
+        button {
+            background-color: #80e0a7;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            display: block;
+            margin: 30px auto;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            background-color: #66c98d;
+        }
+        .emoji {
+            font-size: 1.5rem;
+        }
+        .section p {
+            font-size: 1rem;
+            text-align: justify;
+        }
+
+        /* Stil für das Fragezeichen */
+        .question-mark {
+            color: #006400; /* Grüner Farbton */
+            cursor: pointer;
+            font-size: 20px;
+            margin-left: 5px;
+        }
+        
+        /* Box für die Information */
+        .info-box {
+            display: none;
+            background-color: #f0f8ff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🌍 Willkommen auf dem Mock-Up für nachhaltige Pendelrouten! 🚗💚</h1>
+        <p>Optimieren Sie Ihre Pendelfahrten, reduzieren Sie CO2 und erhalten Sie Belohnungen für Ihre umweltfreundlichen Entscheidungen! 🌱</p>
+    </header>
+
+    <div class="content">
+        <div class="section">
+            <h2>Einführung</h2>
+            <p>Diese Seite stellt ein innovatives Konzept zur Optimierung von Pendelrouten dar, das Echtzeit-Daten, Car-Sharing-Optionen und öffentliche Verkehrsmittel kombiniert, um nachhaltigere Mobilität zu fördern und den Verkehrsfluss zu verbessern. 🌍💡</p>
+            <p>Wählen Sie eine Pendelroute, die mithilfe von V2V und V2X Kommunikation sowie Echtzeitdaten optimiert wird. Bei jeder Fahrt können Sie Ihre CO2-Einsparungen und Reisezeiten im Vergleich zu anderen Routen sehen. Zusätzlich haben Sie die Möglichkeit, freiwillig an der Verkehrsplanung teilzunehmen, die zur Verbesserung der öffentlichen Verkehrsnetzplanung und Stadtplanung beiträgt – und gleichzeitig Punkte zu sammeln, die Sie für Belohnungen eintauschen können. 🛣️</p>
+            <p><strong>Hinweis:</strong> Diese Seite stellt ein Konzept dar und ist als System in Fahrzeugen integriert, das mit einer App kombiniert wird, um die Pendelplanung in der Realität zu erleichtern. Die dargestellten Informationen und Routen sind zu Demonstrationszwecken und nicht real.</p>
+        </div>
+
+        <div class="section">
+            <h2>Wie funktioniert das System? 🛠️</h2>
+            <ol>
+                <li><strong>Routenwahl und CO2-Einsparung:</strong> Wählen Sie eine Pendelroute und sehen Sie, wie viel CO2 Sie einsparen.</li>
+                <li><strong>Freiwillige Teilnahme an der Verkehrsplanung:</strong> Geben Sie anonymisierte Daten weiter und helfen Sie, die öffentliche Infrastruktur zu verbessern. 
+                    <span class="question-mark" onclick="toggleInfoBox()">❓</span>
+                </li>
+                <div id="infoBox" class="info-box">
+                    <p>Durch die freiwillige Weitergabe anonymisierter Daten unterstützen Sie die Stadtplanung und helfen, die Infrastruktur zu verbessern. Ihre Daten werden aggregiert und nicht auf Sie zurückverfolgt. So können bessere Verkehrskonzepte entwickelt werden.</p>
+                </div>
+                <li><strong>CO2-Speicherung und Belohnungen:</strong> Verdienen Sie Punkte und tauschen Sie diese gegen Rabatte und Gutscheine ein.</li>
+                <li><strong>Datenanalyse zur Verbesserung des Verkehrs:</strong> Helfen Sie mit Ihren anonymisierten Daten, die Verkehrsinfrastruktur und das Car-Sharing-Angebot zu verbessern.</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>Interaktive Benutzererfahrung (User Flow) ⏩</h2>
+            <p><strong>Schritt 1:</strong> Geben Sie Ihre Pendelfahrt ein und wählen Sie eine umweltfreundliche Route aus. 🛤️</p>
+            <p><strong>Schritt 2:</strong> Sehen Sie CO2-Einsparungen und Reisezeit und wählen Sie Ihre bevorzugte Route. ⏱️</p>
+            <p><strong>Schritt 3:</strong> Geben Sie anonymisierte Daten zur Verbesserung der Verkehrsplanung weiter. 📊</p>
+            <p><strong>Schritt 4:</strong> Tauschen Sie Ihre gesammelten Punkte gegen Belohnungen ein! 🎁</p>
+        </div>
+
+        <button onclick="window.location.href='start.html';">Fortfahren 🚀</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Nachhaltige Pendelrouten 🌱 | Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <script>
+        // Funktion zum Umschalten der Info-Box
+        function toggleInfoBox() {
+            var infoBox = document.getElementById("infoBox");
+            if (infoBox.style.display === "none") {
+                infoBox.style.display = "block";
+            } else {
+                infoBox.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
