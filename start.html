@@ -100,8 +100,12 @@
       const tripDiv = document.createElement('div');
       tripDiv.className = 'trip-input';
       tripDiv.innerHTML = `
-        <label>Fahrt ${tripIndex}:</label>
-        <input type="text" name="${day}_address_${tripIndex}" placeholder="Adresse (z.B. Büro, Schule)" required>
+        <label>Ziel ${tripIndex}:</label>
+         <select name="${day}_address_${tripIndex}" required>
+          <option value="BMW-World">BMW-World</option>
+          <option value="Deloitte-München">Deloitte-München</option>
+          <option value="TUM">TUM</option>
+        </select>
         <label>Gewünschte Ankunftszeit:</label>
         <input type="time" name="${day}_arrival_${tripIndex}" required>
         <button type="button" class="remove-button" onclick="removeTrip(this)">Löschen</button>

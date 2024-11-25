@@ -134,32 +134,6 @@
       font-size: 24px;
     }
   </style>
-  <script>
-    let currentPoints = 0;
-
-    function selectOption(optionName, co2Reduction) {
-      currentPoints += co2Reduction;
-      document.getElementById('popup-message').textContent = 
-      `Option "${optionName}" wurde gewählt! Sie erhalten ${co2Reduction} Punkte. Möchten Sie anonym Ihre Daten teilen, um Verkehrsplanung zu verbessern?`;
-      document.getElementById('popup').style.display = 'block';
-      document.getElementById('overlay').style.display = 'block';
-
-      // Update the points display
-      document.getElementById('current-points').textContent = currentPoints;
-    }
-
-    function closePopup(shareData) {
-      if (shareData) {
-        currentPoints += 50; // Adding 50 points if the user shares data anonymously
-        document.getElementById('current-points').textContent = currentPoints;
-        alert("🎉 Danke für das Teilen Ihrer Daten! +50 Punkte! 🎉");
-      } else {
-        alert("Danke! Ihre Punkte wurden gutgeschrieben. 👍");
-      }
-      document.getElementById('popup').style.display = 'none';
-      document.getElementById('overlay').style.display = 'none';
-    }
-  </script>
 </head>
 <body>
   <div class="container">
@@ -224,5 +198,81 @@
     <button class="button" onclick="closePopup(true)">Ja, anonym teilen</button>
     <button class="button" onclick="closePopup(false)">Nein, nur Punkte sammeln</button>
   </div>
+  <script>
+    let currentPoints = 0;
+    let matchedAddress = null;
+    let optionLinks = {};
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const days = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"];
+
+      for (const day of days) {
+        const addressKey = `${day}_address_1`;
+        const selectedAddress = urlParams.get(addressKey);
+
+        if (selectedAddress) {
+          matchedAddress = selectedAddress;
+          break;
+        }
+      }
+
+      if (!matchedAddress) {
+        matchedAddress = "Other";
+      }
+
+      optionLinks = {
+        "BMW-World": {
+          "Öffentlicher Verkehr": "https://routnet.onrender.com/?scenario=bmw-world.transport",
+          "Car Sharing": "https://routnet.onrender.com/?scenario=bmw-world.shared",
+          "Auto + öffentlicher Verkehr": "https://routnet.onrender.com/?scenario=bmw-world.combined",
+          "Direkte Autofahrt": "https://routnet.onrender.com/?scenario=bmw-world.car"
+        },
+        "Deloitte-München": {
+          "Öffentlicher Verkehr": "https://routnet.onrender.com/?scenario=deloitte.transport",
+          "Car Sharing": "https://routnet.onrender.com/?scenario=deloitte.shared",
+          "Auto + öffentlicher Verkehr": "https://routnet.onrender.com/?scenario=deloitte.combined",
+          "Direkte Autofahrt": "https://routnet.onrender.com/?scenario=deloitte.car"
+        },
+        "TUM": {
+          "Öffentlicher Verkehr": "https://routnet.onrender.com/?scenario=tum.transport",
+          "Car Sharing": "https://routnet.onrender.com/?scenario=tum.shared",
+          "Auto + öffentlicher Verkehr": "https://routnet.onrender.com/?scenario=tum.car",
+          "Direkte Autofahrt": "https://routnet.onrender.com/?scenario=tum.car"
+        }
+      };
+    });
+
+    function selectOption(optionName, co2Reduction) {
+      const redirectLink = optionLinks[matchedAddress][optionName];
+
+      if (!redirectLink) {
+        alert("Es gibt keinen Link für diese Option!");
+        return;
+      }
+
+      document.getElementById('popup-message').textContent = `Option "${optionName}" wurde gewählt! CO₂ Reduktion: ${co2Reduction}%. Möchten Sie Ihre Daten anonym teilen?`;
+      document.getElementById('popup').style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
+      document.getElementById('popup').dataset.redirectLink = redirectLink;
+    }
+
+    function closePopup(shareData) {
+      const redirectLink = document.getElementById('popup').dataset.redirectLink;
+
+      if (shareData) {
+        currentPoints += 50;
+        document.getElementById('current-points').textContent = currentPoints;
+        alert("🎉 Danke für das Teilen Ihrer Daten! +50 Punkte! 🎉");
+      } else {
+        alert("Danke! Ihre Punkte wurden gutgeschrieben. 👍");
+      }
+
+      document.getElementById('popup').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
+
+      window.location.href = redirectLink;
+    }
+  </script>
 </body>
 </html>
