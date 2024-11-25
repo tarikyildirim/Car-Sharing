@@ -245,11 +245,7 @@
 
     function selectOption(optionName, co2Reduction) {
       const redirectLink = optionLinks[matchedAddress][optionName];
-
-      if (!redirectLink) {
-        alert("Es gibt keinen Link für diese Option!");
-        return;
-      }
+      currentPoints += co2Reduction;
 
       document.getElementById('popup-message').textContent = `Option "${optionName}" wurde gewählt! CO₂ Reduktion: ${co2Reduction}%. Möchten Sie Ihre Daten anonym teilen?`;
       document.getElementById('popup').style.display = 'block';
