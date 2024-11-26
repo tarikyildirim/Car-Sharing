@@ -244,13 +244,14 @@
     });
 
     function selectOption(optionName, co2Reduction) {
-      const redirectLink = optionLinks[matchedAddress][optionName];
       currentPoints += co2Reduction;
-
-      document.getElementById('popup-message').textContent = `Option "${optionName}" wurde gewählt! CO₂ Reduktion: ${co2Reduction}%. Möchten Sie Ihre Daten anonym teilen?`;
+      const redirectLink = optionLinks[matchedAddress][optionName];
+      document.getElementById('popup-message').textContent = `Option "${optionName}" wurde gewählt! Sie erhalten ${co2Reduction} Punkte. Möchten Sie anonym Ihre Daten teilen, um Verkehrsplanung zu verbessern?`;
       document.getElementById('popup').style.display = 'block';
       document.getElementById('overlay').style.display = 'block';
       document.getElementById('popup').dataset.redirectLink = redirectLink;
+
+      document.getElementById('current-points').textContent = currentPoints;
     }
 
     function closePopup(shareData) {
